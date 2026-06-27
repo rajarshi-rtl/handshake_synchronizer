@@ -34,11 +34,21 @@ dual_flop_synchronizer des_to_src(
 
 reg [DATA_WIDTH-1:0] src_ff, des_ff_in;
 
+// Capture Flip Flop
+reg [DATA_WIDTH-1:0] capture_ff;
+
 always @ (posedge src_clk or negedge rst) begin
-	if (!rst) des_ff_in <= 0;
-	else des_ff_in <= (src_ff_en) ? data_src : des_ff_in;
+	if (!rst) capture_ff <= 0;	
+	else capture_ff <= (~busy && send) ? data_src : capture_ff;
 end
 
+// Source Flip Flop
+always @ (posedge src_clk or negedge rst) begin
+	if (!rst) des_ff_in <= 0;
+	else des_ff_in <= (src_ff_en) ? capture_ff : des_ff_in;
+end
+
+// Destination Flip Flop
 always @ (posedge des_clk or negedge rst) begin
 	if (!rst) data_des <= 0;
 	else data_des <= (des_ff_en) ? des_ff_in : data_des;
