@@ -1,11 +1,15 @@
+// ------------------ SENDER STATE MACHINE ----------------- //
+
 module sender_fsm(
 	input src_clk, send, ack, rst,
 	output reg req, busy, load_src_reg_en
 );
 
+// Encoding the states of the sender FSM
 parameter idle = 2'b00, s1 = 2'b01, s2 = 2'b10, s3 = 2'b11;
 reg [1:0] present_state, next_state;
 
+// Present State Logic
 always @ (posedge src_clk or negedge rst) begin
 	if (!rst) begin
 		next_state <= idle;
@@ -17,6 +21,7 @@ always @ (posedge src_clk or negedge rst) begin
 	end
 end	
 
+// Next State Logic
 always @ (present_state or send or ack) begin
 	case(present_state)
 		idle: begin

@@ -1,7 +1,11 @@
+// ------------------- HANDSHAKE SYNCHRONIZER ------------------- //
+
+// Importing the modules which needs to be instantiated
 `include "dual_flop_synchronizer.v"
 `include "sender_fsm.v"
 `include "reciever_fsm.v"
 
+// Handshake Synchronizer module definition
 module handshake_synchronizer #(parameter DATA_WIDTH = 8) (
 	input src_clk, des_clk, rst, send, 
 	input [DATA_WIDTH-1:0] data_src,
@@ -9,24 +13,31 @@ module handshake_synchronizer #(parameter DATA_WIDTH = 8) (
 	output busy
 );
 
+// Declaring the temporary variables
 wire req_src, ack_src, src_ff_en;
 wire req_des, ack_des, des_ff_en;
 
+// Sender FSM instantiation
 sender_fsm sender_domain(
 	.src_clk(src_clk), .send(send), .ack(ack_src), .rst(rst),
 	.req(req_src), .busy(busy), .load_src_reg_en(src_ff_en)
 );
 
+// Reciever FSM instantiation
 reciever_fsm destination_domain(
 	.des_clk(des_clk), .req(req_des), .rst(rst),
 	.des_ff_en(des_ff_en), .ack(ack_des)
 );
 
+// Dual Flop Synchrnoizer for REQUEST signal (From sender to reciever clock
+// domain)
 dual_flop_synchronizer src_to_des (
 	.clk(des_clk), .in(req_src), .rst(rst),
 	.out(req_des)
 );
 
+// Dual Flop Synchronizer for ACKNOWLEDGE signal (From reciever to sender
+// clock domain)
 dual_flop_synchronizer des_to_src(
 	.clk(src_clk), .in(ack_des), .rst(rst),
 	.out(ack_src)

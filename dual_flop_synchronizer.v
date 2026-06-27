@@ -1,3 +1,5 @@
+// ---------- DUAL FLOP SYNCHRONIZER ------------- //
+
 module dual_flop_synchronizer(
 	input clk, in, rst,
 	output reg out
