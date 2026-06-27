@@ -67,6 +67,13 @@ The simulations confirm:
 
 ---
 
+## Advantages
+
+* Reliable data transfer between asynchronous clock domains using handshake protocol.
+* Preserves the requested data even if the external input changes while the synchronizer is busy.
+* Prevents the current transaction from being overwritten by subsequent input updates.
+
+
 ## Disadvantages
 
 * Increased Latency
