@@ -45,13 +45,7 @@ If the source updates the input while `BUSY = 1`, the source register may be ove
 ### Proposed Architecture
 
 ```
-Input Data
-    │
-    ▼
-Capture FF
-    │
-    ▼
-Source Register
+Input Data ──► Capture FF ──► Source Register
 ```
 
 The Capture Flip-Flop acts as a temporary holding register.
@@ -73,7 +67,12 @@ The simulations confirm:
 
 ---
 
+## Disadvantages
+
+* Increased Latency
+* Additional Hardware and Power Consumption
+
 ## Author
 Rajarshi Ray  
-B.Tech in Electronics and Telecommunication Engineering
+B.Tech in Electronics and Telecommunication Engineering  
 IIEST Shibpur
