@@ -20,7 +20,7 @@ To address this limitation, this design adds a **Capture Flip-Flop** before the 
 
 The design consists of:
 
-* Source-side Capture Flip-Flop (engineered enhancement)
+* Source-side Capture Flip-Flop (Additional enhancement)
 * Source Register
 * Sender FSM
 * Request Synchronizer (2-FF)
@@ -30,7 +30,7 @@ The design consists of:
 
 ---
 
-## Engineered Improvement
+## Improvement
 
 ### Conventional Handshake Synchronizer
 
