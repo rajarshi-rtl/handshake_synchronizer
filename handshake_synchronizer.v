@@ -29,15 +29,13 @@ reciever_fsm destination_domain(
 	.des_ff_en(des_ff_en), .ack(ack_des)
 );
 
-// Dual Flop Synchrnoizer for REQUEST signal (From sender to reciever clock
-// domain)
+// Dual Flop Synchrnoizer for REQUEST signal (From sender to reciever clock domain)
 dual_flop_synchronizer src_to_des (
 	.clk(des_clk), .in(req_src), .rst(rst),
 	.out(req_des)
 );
 
-// Dual Flop Synchronizer for ACKNOWLEDGE signal (From reciever to sender
-// clock domain)
+// Dual Flop Synchronizer for ACKNOWLEDGE signal (From reciever to sender clock domain)
 dual_flop_synchronizer des_to_src(
 	.clk(src_clk), .in(ack_des), .rst(rst),
 	.out(ack_src)
