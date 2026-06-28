@@ -18,7 +18,7 @@ always @ (posedge des_clk or negedge rst) begin
 	else present_state <= next_state;
 end
 
-// Mext State Logic
+// Next State Logic
 always @ (*) begin
 	case(present_state) 
 		idle: begin
